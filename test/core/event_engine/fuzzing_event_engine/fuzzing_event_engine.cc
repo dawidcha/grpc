@@ -38,7 +38,7 @@
 
 // IWYU pragma: no_include <sys/socket.h>
 
-extern gpr_timespec (*gpr_now_impl)(gpr_clock_type clock_type);
+extern GPR_DLL gpr_timespec (*gpr_now_impl)(gpr_clock_type clock_type);
 
 using namespace std::chrono_literals;
 
