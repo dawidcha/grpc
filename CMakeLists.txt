@@ -447,7 +447,12 @@ set(gRPC_UPB_GEN_DUPL_SRC
 )
 set(gRPC_ADDITIONAL_DLL_SRC
   src/core/lib/security/credentials/tls/grpc_tls_certificate_distributor.cc
+  src/core/lib/security/credentials/tls/grpc_tls_credentials_options.cc
   src/core/lib/security/credentials/tls/grpc_tls_certificate_provider.cc
+  src/core/lib/security/credentials/tls/grpc_tls_certificate_verifier.cc
+  src/cpp/common/tls_credentials_options.cc
+  src/cpp/common/tls_certificate_provider.cc
+  src/cpp/common/tls_certificate_verifier.cc
 )
 
 endif() # BUILD_SHARED_LIBS AND WIN32
