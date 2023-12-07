@@ -21082,6 +21082,16 @@ if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_POSIX)
     test/cpp/util/get_grpc_test_runfile_dir.cc
     test/cpp/util/windows/manifest_file.cc
   )
+  if(WIN32 AND MSVC)
+    if(BUILD_SHARED_LIBS)
+      target_compile_definitions(posix_event_engine_native_dns_test
+      PRIVATE
+        "GPR_DLL_IMPORTS"
+        "GRPC_DLL_IMPORTS"
+        "GRPCXX_DLL_IMPORTS"
+      )
+    endif()
+  endif()
   target_compile_features(posix_event_engine_native_dns_test PUBLIC cxx_std_14)
   target_include_directories(posix_event_engine_native_dns_test
     PRIVATE
