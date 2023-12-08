@@ -3245,7 +3245,7 @@ add_library(grpc_unsecure
   third_party/upb/upb/wire/encode.c
   third_party/upb/upb/wire/eps_copy_input_stream.c
   third_party/upb/upb/wire/reader.c
-  ${gRPC_ADDITIONAL_DLL_SRC}'
+  ${gRPC_ADDITIONAL_DLL_SRC}
 )
 
 target_compile_features(grpc_unsecure PUBLIC cxx_std_14)
@@ -3997,7 +3997,7 @@ add_library(grpc++
   src/cpp/util/status.cc
   src/cpp/util/string_ref.cc
   src/cpp/util/time_cc.cc
-  ${gRPC_UPB_GEN_DUPL_SRC}'
+  ${gRPC_UPB_GEN_DUPL_SRC}
 )
 
 target_compile_features(grpc++ PUBLIC cxx_std_14)
@@ -4275,7 +4275,7 @@ endif()
 add_library(grpc++_alts
   src/cpp/common/alts_context.cc
   src/cpp/common/alts_util.cc
-  ${gRPC_UPB_GEN_DUPL_SRC}'
+  ${gRPC_UPB_GEN_DUPL_SRC}
 )
 
 target_compile_features(grpc++_alts PUBLIC cxx_std_14)
@@ -4742,7 +4742,7 @@ add_library(grpc++_unsecure
   src/cpp/util/status.cc
   src/cpp/util/string_ref.cc
   src/cpp/util/time_cc.cc
-  ${gRPC_UPB_GEN_DUPL_SRC}'
+  ${gRPC_UPB_GEN_DUPL_SRC}
 )
 
 target_compile_features(grpc++_unsecure PUBLIC cxx_std_14)
@@ -21082,6 +21082,16 @@ if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_POSIX)
     test/cpp/util/get_grpc_test_runfile_dir.cc
     test/cpp/util/windows/manifest_file.cc
   )
+  if(WIN32 AND MSVC)
+    if(BUILD_SHARED_LIBS)
+      target_compile_definitions(posix_event_engine_native_dns_test
+      PRIVATE
+        "GPR_DLL_IMPORTS"
+        "GRPC_DLL_IMPORTS"
+        "GRPCXX_DLL_IMPORTS"
+      )
+    endif()
+  endif()
   target_compile_features(posix_event_engine_native_dns_test PUBLIC cxx_std_14)
   target_include_directories(posix_event_engine_native_dns_test
     PRIVATE
