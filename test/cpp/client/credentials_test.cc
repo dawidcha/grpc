@@ -272,9 +272,11 @@ TEST(CredentialsTest, StsCredentialsOptionsFromEnv) {
 }
 
 TEST(CredentialsTest, TlsCredentialsOptionsCopyConstructor) {
-  // define a class that grants access to the internal grpc_tls_credentials_options pointer
-  class TlsTestCredentialsOptions : public grpc::experimental::TlsCredentialsOptions {
-  public:
+  // define a class that grants access to the internal
+  // grpc_tls_credentials_options pointer
+  class TlsTestCredentialsOptions
+      : public grpc::experimental::TlsCredentialsOptions {
+   public:
     grpc_tls_credentials_options* internal_cred_opts() {
       return mutable_c_credentials_options();
     }
@@ -283,7 +285,8 @@ TEST(CredentialsTest, TlsCredentialsOptionsCopyConstructor) {
   TlsTestCredentialsOptions copied_options = options;
 
   // Make sure the copy constructor cloned the internal pointer
-  GPR_ASSERT(options.internal_cred_opts() != copied_options.internal_cred_opts());
+  GPR_ASSERT(options.internal_cred_opts() !=
+             copied_options.internal_cred_opts());
 }
 
 TEST(CredentialsTest, TlsChannelCredentialsWithDefaultRootsAndDefaultVerifier) {
